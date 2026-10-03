@@ -86,3 +86,25 @@ resource "aws_security_group" "backend" {
     Environment = "assessment"
   }
 }
+resource "aws_subnet" "public_2" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.3.0/24"
+  availability_zone       = "eu-central-1b"
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name        = "cloud-assessment-public-subnet-2"
+    Environment = "assessment"
+  }
+}
+
+resource "aws_subnet" "private_2" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.4.0/24"
+  availability_zone = "eu-central-1b"
+
+  tags = {
+    Name        = "cloud-assessment-private-subnet-2"
+    Environment = "assessment"
+  }
+}

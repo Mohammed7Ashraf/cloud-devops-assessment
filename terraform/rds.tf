@@ -2,7 +2,8 @@ resource "aws_db_subnet_group" "main" {
   name = "cloud-assessment-db-subnet-group"
 
   subnet_ids = [
-    aws_subnet.private.id
+    aws_subnet.private.id,
+    aws_subnet.private_2.id
   ]
 
   tags = {
