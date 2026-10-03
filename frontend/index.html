@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud DevOps Assessment</title>
+</head>
+<body>
+    <h1>Cloud DevOps Assessment</h1>
+    <p>Three-tier application</p>
+
+    <button onclick="checkAPI()">Check API</button>
+
+    <p id="result"></p>
+
+    <script>
+        async function checkAPI() {
+            const response = await fetch("/api/hello");
+            const data = await response.json();
+
+            document.getElementById("result").innerText = data.message;
+        }
+    </script>
+</body>
+</html>
