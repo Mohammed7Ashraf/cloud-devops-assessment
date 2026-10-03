@@ -1,0 +1,32 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        working-directory: backend
+        run: pip install -r requirements.txt
+
+      - name: Test API
+        working-directory: backend
+        run: |
+          python -c "from app import app; client = app.test_client(); assert client.get('/health').status_code == 200"
+
+      - name: Build Docker image
+        run: docker build -t cloud-assessment-api ./backend
